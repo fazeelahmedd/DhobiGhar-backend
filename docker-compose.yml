@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis:latest
+
+  postgres:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=dhobighardb
+      - POSTGRES_USER=dhobigharadmin
+      - POSTGRES_PASSWORD=dhobigharpassword
